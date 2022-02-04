@@ -40,25 +40,25 @@ public class Persona {
         System.out.print("Dia: "); int dia = input.nextInt();
         System.out.print("\nMes: "); int mes = input.nextInt();
         System.out.print("\nAño: "); int anio = input.nextInt();
-        this.fecha_nacimiento = new Date(anio,mes,dia);
+        this.fecha_nacimiento = new Date(anio-1900,mes-1,dia);
     }
 
     public int calcularEdad() {
         Date fecha_actual = new Date();
         int edad;
 
-       edad = Math.max(fecha_actual.getYear()+1900,fecha_nacimiento.getYear()) - Math.min(fecha_actual.getYear()+1900,fecha_nacimiento.getYear());
+       edad = Math.abs((fecha_actual.getYear())-fecha_nacimiento.getYear());
 
-        if(edad != 0){
-            if((fecha_actual.getMonth()+1) <= fecha_nacimiento.getMonth()){
-                if(fecha_nacimiento.getDate() > fecha_actual.getDate()){
-                    edad--;
-                }
+       if(edad != 0){
+            if((fecha_actual.getMonth()) <= fecha_nacimiento.getMonth()){
+                    if(fecha_nacimiento.getDate() > fecha_actual.getDate()){
+                        edad--;
+                    }
             }else{
                 edad--;
             }
-        }
-        return edad;
+       }
+       return edad;
     }
 
     public boolean menorQue(int edad2){
@@ -67,7 +67,7 @@ public class Persona {
 
     public void mostrarPersona(){
         System.out.printf("\nNombre: %s\n",this.nombre);
-        System.out.printf("Fecha de nacimiento: %d/%d/%d\n",this.fecha_nacimiento.getDate(),this.fecha_nacimiento.getMonth(),this.fecha_nacimiento.getYear());
+        System.out.printf("Fecha de nacimiento: %d/%d/%d\n",this.fecha_nacimiento.getDate(),this.fecha_nacimiento.getMonth()+1,this.fecha_nacimiento.getYear()+1900);
         System.out.printf("Edad: %d\n",calcularEdad());
     }
 
